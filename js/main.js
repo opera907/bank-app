@@ -21,12 +21,44 @@ function start(accountArr) {
   })
 
   //각 계좌마다 섹션에 정보출력
-  for(let i = 0; i < accountsLength; i++){
+  for (let i = 0; i < 1; i++) {
     const account = accounts[i]
-    makeComponent(account)
+    makeComponent(account, i)
   }
 }
 
-const makeComponent = (account) => {
+const makeComponent = (account, index) => {
   console.log(account)
+
+  const targetSection = document.querySelector(`.accont-${index + 1}`)
+
+  //header정보 
+  const header = targetSection.querySelector('.header-title')
+  //계좌 정보 
+  const accNum = targetSection.querySelector('.account-number')
+  const accTotal = targetSection.querySelector('.account-total')
+  const barGage = targetSection.querySelector('.bar-data')
+  const barBtn = targetSection.querySelector('.bar-btn')
+  const remainDate = targetSection.querySelector('.account-remain .date')
+  const remainAmount = targetSection.querySelector('.account-remain .amount')
+
+  //데이터 출력
+  header.innerText = account.accountName
+  accNum.innerText = account.accountNum
+  accTotal.innerText = `${Number(account.accountCash).toLocaleString()}원`
+  barGage.style.backgroundColor = account.barColor
+  barGage.style.width = `${leftBudgetPercent()}%`
+  barBtn.style.left = `${leftBudgetPercent()}%`
+  remainDate.innerText = leftDay()
+  remainAmount.innerText = leftBudget()
+}
+
+const leftBudgetPercent = () => {
+  return 70
+}
+const leftBudget = () => {
+  return 5
+}
+const leftDay = () => {
+  return 5
 }
