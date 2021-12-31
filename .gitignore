@@ -1,0 +1,12 @@
+.cache/
+.vscode/
+node_modules/
+dist/
+/More
+/SkypeMessage
+main-border.css
+package.json
+package-lock.json
+js/cal.js
+js/main.js
+js/test.js
