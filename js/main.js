@@ -15,7 +15,7 @@ function start(accountArr) {
   accounts.forEach((cur, index) => {
     if (index !== 0) {
       const cloneSection = accountSection.cloneNode(true)
-      cloneSection.className = `view-page swiper-slide accont-${index + 1}`
+      cloneSection.className = `view-page swiper-slide account-${index + 1}`
       main.append(cloneSection)
     }
   })
@@ -30,7 +30,7 @@ function start(accountArr) {
 const makeComponent = (account, index) => {
   console.log(account)
 
-  const targetSection = document.querySelector(`.accont-${index + 1}`)
+  const targetSection = document.querySelector(`.account-${index + 1}`)
 
   //header정보 
   const header = targetSection.querySelector('.header-title')

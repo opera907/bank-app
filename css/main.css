@@ -10,17 +10,17 @@ main{position: relative; margin-top: 9px;}
 .bk {color: #000; font-weight: 500;}
 .gray {color: #858585; font-weight: 500;}
 /* account style */
-section.accont-1 .goal-item:nth-child(1) .goal-item-color-box {
+section.account-1 .goal-item:nth-child(1) .goal-item-color-box {
   background-color: #FF5F00;
 }
-section.accont-1 .goal-item:nth-child(2) .goal-item-color-box {
+section.account-1 .goal-item:nth-child(2) .goal-item-color-box {
   background-color: #FEB700;
 }
 
-section.accont-2 .goal-item:nth-child(1) .goal-item-color-box {
+section.account-2 .goal-item:nth-child(1) .goal-item-color-box {
   background-color: #00ff88;
 }
-section.accont-2 .goal-item:nth-child(2) .goal-item-color-box {
+section.account-2 .goal-item:nth-child(2) .goal-item-color-box {
   background-color: #1efe00;
 }
 /* header */
