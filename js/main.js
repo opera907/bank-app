@@ -29,7 +29,6 @@ function start(accountArr) {
 
 const makeComponent = (account, index) => {
   console.log(account)
-
   const targetSection = document.querySelector(`.account-${index + 1}`)
 
   //header정보 
@@ -47,17 +46,17 @@ const makeComponent = (account, index) => {
   accNum.innerText = account.accountNum
   accTotal.innerText = `${Number(account.accountCash).toLocaleString()}원`
   barGage.style.backgroundColor = account.barColor
-  barGage.style.width = `${leftBudgetPercent()}%`
-  barBtn.style.left = `${leftBudgetPercent()}%`
+  barGage.style.width = `${leftBudgetPercent(account.TotalSpend, account.Budget)}%`
+  barBtn.style.left = `${leftBudgetPercent(account.TotalSpend, account.Budget)}%`
   remainDate.innerText = leftDay()
-  remainAmount.innerText = leftBudget()
+  remainAmount.innerText = leftBudget(account.TotalSpend, account.Budget)
 }
 
-const leftBudgetPercent = () => {
-  return 70
+const leftBudgetPercent = (totalSpend, budget) => {
+  return (Number(totalSpend) / Number(budget)) * 100
 }
-const leftBudget = () => {
-  return 5
+const leftBudget = (totalSpend, budget) => {
+  return Number(budget) - Number(totalSpend) 
 }
 const leftDay = () => {
   return 5
