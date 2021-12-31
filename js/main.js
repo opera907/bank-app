@@ -11,6 +11,7 @@ function start(accountArr) {
   const main = document.querySelector('.main-contents-wrap')
   const accountSection = document.querySelector('.view-page')
   console.log(main, accountSection)
+
   accounts.forEach((cur, index) => {
     if (index !== 0) {
       const cloneSection = accountSection.cloneNode(true)
@@ -19,4 +20,13 @@ function start(accountArr) {
     }
   })
 
+  //각 계좌마다 섹션에 정보출력
+  for(let i = 0; i < accountsLength; i++){
+    const account = accounts[i]
+    makeComponent(account)
+  }
+}
+
+const makeComponent = (account) => {
+  console.log(account)
 }
