@@ -21,7 +21,7 @@ function start(accountArr) {
   })
 
   //각 계좌마다 섹션에 정보출력
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < 3; i++) {
     const account = accounts[i]
     makeComponent(account, i)
   }
@@ -50,14 +50,43 @@ const makeComponent = (account, index) => {
   barBtn.style.left = `${leftBudgetPercent(account.TotalSpend, account.Budget)}%`
   remainDate.innerText = leftDay()
   remainAmount.innerText = leftBudget(account.TotalSpend, account.Budget)
+
+  //저금통 
+  const goalWrap = targetSection.querySelector('.goal-list')
+
+  account.saveList.forEach(ele => {
+    const goalItem = document.createElement('li')
+    const colorBox = document.createElement('div')
+    const goalTit = document.createElement('p')
+    const goalTotal = document.createElement('p')
+    goalItem.className = "goal-item"
+    colorBox.className = "goal-item-color-box"
+    goalTit.className = "goal-tit"
+    goalTotal.className = "goal-total"
+    
+    colorBox.appendChild(goalTit)
+    colorBox.appendChild(goalTotal)
+    goalItem.appendChild(colorBox)
+    goalWrap.appendChild(goalItem)
+
+    colorBox.style.backgroundColor = ele.color
+    colorBox.style.width =  `${(ele.SavedMoney / ele.goal) * 100}%`
+    goalTit.innerText = ele.name
+    goalTotal.innerText = `${calTotal(ele.goal, ele.SavedMoney)}원`
+  })
+
 }
 
 const leftBudgetPercent = (totalSpend, budget) => {
   return (Number(totalSpend) / Number(budget)) * 100
 }
 const leftBudget = (totalSpend, budget) => {
-  return Number(budget) - Number(totalSpend) 
+  return Number(budget) - Number(totalSpend)
 }
 const leftDay = () => {
-  return 5
+  return // 말일 - 오늘
 }
+const calTotal = (goal, SavedMoney) => {
+  return (Number(goal) -Number(SavedMoney)).toLocaleString()
+}
+
