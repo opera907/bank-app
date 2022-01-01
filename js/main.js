@@ -21,7 +21,7 @@ function start(accountArr) {
   })
 
   //각 계좌마다 섹션에 정보출력
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 1; i++) {
     const account = accounts[i]
     makeComponent(account, i)
   }
@@ -63,18 +63,70 @@ const makeComponent = (account, index) => {
     colorBox.className = "goal-item-color-box"
     goalTit.className = "goal-tit"
     goalTotal.className = "goal-total"
-    
+
     colorBox.appendChild(goalTit)
     colorBox.appendChild(goalTotal)
     goalItem.appendChild(colorBox)
     goalWrap.appendChild(goalItem)
 
     colorBox.style.backgroundColor = ele.color
-    colorBox.style.width =  `${(ele.SavedMoney / ele.goal) * 100}%`
+    colorBox.style.width = `${(ele.SavedMoney / ele.goal) * 100}%`
     goalTit.innerText = ele.name
     goalTotal.innerText = `${calTotal(ele.goal, ele.SavedMoney)}원`
   })
 
+  //지출내역
+  const daySpendingUl = targetSection.querySelector('.detail-date-list')
+
+  let currDate
+  let currIndex = 0
+  account.bankList.reverse()
+  account.bankList.forEach(day => {
+    if (currDate !== day.date) {
+      // outer ul li생성
+      const dayItem = document.createElement('li')
+      const dayTit = document.createElement('h3')
+      const dayTotal = document.createElement('p')
+      dayItem.className = "detail-date-item"
+      dayTit.className = "date-tit bk"
+      dayTotal.className = "date-total gray"
+
+      dayItem.appendChild(dayTit)
+      dayItem.appendChild(dayTotal)
+      daySpendingUl.appendChild(dayItem)
+
+      dayTit.innerText = day.date
+      dayTotal.innerText = `000원 지출`
+
+      //inner ul생성
+      const innerUl = document.createElement('ul')
+      const innerLi = document.createElement('li')
+      const spendTit = document.createElement('span')
+      const spendMoney = document.createElement('span')
+      innerUl.className = "day-list"
+      innerLi.className = "day-content"
+      spendTit.className = "day-cont-tit"
+      spendMoney.className = "day-cont-total"
+
+      innerLi.appendChild(spendTit)
+      innerLi.appendChild(spendMoney)
+      innerUl.appendChild(innerLi)
+      dayItem.appendChild(innerUl)
+
+      spendTit.innerText = day.history
+      spendMoney.innerText = day.price
+
+      currIndex++
+    } else {
+      const dayList = targetSection.querySelector(`.detail-date-list > li:nth-child(${currIndex}) .day-list`)
+      const cloneSpendLi = dayList.querySelector('li').cloneNode(true)
+      cloneSpendLi.querySelector('.day-cont-tit').innerText = day.history
+      cloneSpendLi.querySelector('.day-cont-total').innerText = day.price
+
+      dayList.appendChild(cloneSpendLi)
+    }
+    currDate = day.date
+  })
 }
 
 const leftBudgetPercent = (totalSpend, budget) => {
@@ -87,6 +139,5 @@ const leftDay = () => {
   return // 말일 - 오늘
 }
 const calTotal = (goal, SavedMoney) => {
-  return (Number(goal) -Number(SavedMoney)).toLocaleString()
+  return (Number(goal) - Number(SavedMoney)).toLocaleString()
 }
-
