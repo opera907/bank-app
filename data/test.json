@@ -771,16 +771,16 @@
       "TotalSpend": "170000",
       "barColor": "#4C89FF",
       "saveList": [{
-          "name": "여행가자",
+          "name": "게임기^^",
           "goal": "1000000",
           "SavedMoney": "842200",
-          "color": "#FF5F00"
+          "color": "#55ACEE"
         },
         {
-          "name": "냉장고사기",
+          "name": "기부실천!",
           "goal": "2000000",
           "SavedMoney": "1422000",
-          "color": "#FEB700"
+          "color": "#005F59"
         }
       ],
       "bankList": [{
@@ -1535,16 +1535,16 @@
       "TotalSpend": "1000000",
       "barColor": "#C64CFF",
       "saveList": [{
-          "name": "여행가자",
+          "name": "딸냉장고",
           "goal": "1000000",
           "SavedMoney": "842200",
-          "color": "#FF5F00"
+          "color": "#0A73C4"
         },
         {
-          "name": "냉장고사기",
+          "name": "아들 컴퓨터",
           "goal": "2000000",
           "SavedMoney": "1422000",
-          "color": "#FEB700"
+          "color": "#EEBA00"
         }
       ],
       "bankList": [{
