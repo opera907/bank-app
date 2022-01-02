@@ -95,7 +95,7 @@ const makeComponent = (account, index) => {
       dayItem.appendChild(dayTotal)
       daySpendingUl.appendChild(dayItem)
 
-      dayTit.innerText = day.date
+      dayTit.innerText = calcDate(day.date)
       dayTotal.innerText = `000원 지출`
 
       //inner ul생성
@@ -148,3 +148,29 @@ const checkIncome = (price, income) => {
     return `<span class="day-cont-total">${price}</span>`
   }
 }
+
+const calcDate = (date) => {
+  const today = new Date('2021/10/4') //임의로 오늘 설정 
+  const todayTime = today.getTime()
+  const currDay = new Date(date)
+  const currDayTime = currDay.getTime()
+  let diffDay = todayTime - currDayTime
+  diffDay = diffDay / 1000 / 60 / 60 / 24 //시간을 다시 날짜로 변경
+  diffDay = Math.abs(Number.parseInt(diffDay)); //절대값만 반환
+
+  day = 0
+  //console.log(diffDay)
+  if (diffDay == 0) {
+    day = '오늘'
+  } else if(diffDay == 1) {
+    day = '어제'
+  } else if(diffDay <= 7) {
+    day = `${diffDay}일전`
+  } else{
+    day = date
+  }
+  
+  return day
+}
+
+// 1. 저금통 2개이상일때 넓이 수정 2. 하루별 지출 계산 함수 3. 오늘 기준 달 말일 - 오늘 = n일 남음 함수
