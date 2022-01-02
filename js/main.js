@@ -80,8 +80,8 @@ const makeComponent = (account, index) => {
 
   let currDate
   let currIndex = 0
-  account.bankList.reverse()
-  account.bankList.forEach(day => {
+  console.log(account.bankList.reverse())
+  account.bankList.forEach((day, index, bankList) => {
     if (currDate !== day.date) {
       // outer ul li생성
       const dayItem = document.createElement('li')
@@ -114,14 +114,14 @@ const makeComponent = (account, index) => {
       dayItem.appendChild(innerUl)
 
       spendTit.innerText = day.history
-      spendMoney.innerText = day.price
-
+      spendMoney.innerHTML = checkIncome(day.price, day.income)
       currIndex++
     } else {
       const dayList = targetSection.querySelector(`.detail-date-list > li:nth-child(${currIndex}) .day-list`)
       const cloneSpendLi = dayList.querySelector('li').cloneNode(true)
+
       cloneSpendLi.querySelector('.day-cont-tit').innerText = day.history
-      cloneSpendLi.querySelector('.day-cont-total').innerText = day.price
+      cloneSpendLi.querySelector('.day-cont-total').innerHTML = checkIncome(day.price, day.income)
 
       dayList.appendChild(cloneSpendLi)
     }
@@ -140,4 +140,11 @@ const leftDay = () => {
 }
 const calTotal = (goal, SavedMoney) => {
   return (Number(goal) - Number(SavedMoney)).toLocaleString()
+}
+const checkIncome = (price, income) => {
+  if (income == "in") {
+    return `<span class="day-cont-total income">${price}</span>`
+  } else {
+    return `<span class="day-cont-total">${price}</span>`
+  }
 }
