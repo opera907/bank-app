@@ -96,7 +96,7 @@ const makeComponent = (account, index) => {
       daySpendingUl.appendChild(dayItem)
 
       dayTit.innerText = calcDate(day.date)
-      dayTotal.innerText = `000원 지출`
+      dayTotal.innerText = `${calcTotalSpend(day.date, account.bankList)}원 지출`
 
       //inner ul생성
       const innerUl = document.createElement('ul')
@@ -162,15 +162,20 @@ const calcDate = (date) => {
   //console.log(diffDay)
   if (diffDay == 0) {
     day = '오늘'
-  } else if(diffDay == 1) {
+  } else if (diffDay == 1) {
     day = '어제'
-  } else if(diffDay <= 7) {
+  } else if (diffDay <= 7) {
     day = `${diffDay}일전`
-  } else{
+  } else {
     day = date
   }
-  
+
   return day
 }
-
-// 1. 저금통 2개이상일때 넓이 수정 2. 하루별 지출 계산 함수 3. 오늘 기준 달 말일 - 오늘 = n일 남음 함수
+const calcTotalSpend = (date, account) => {
+  const sameDate = account.filter(ele => ele.date == date && ele.income == "out")
+  const total = sameDate.reduce(
+    (sum, curr) => sum + curr.price,
+    0)
+  return total.toLocaleString()
+}
