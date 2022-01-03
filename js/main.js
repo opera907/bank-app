@@ -21,7 +21,7 @@ function start(accountArr) {
   })
 
   //각 계좌마다 섹션에 정보출력
-  for (let i = 0; i < 1; i++) {
+  for (let i = 0; i < accountsLength; i++) {
     const account = accounts[i]
     makeComponent(account, i)
   }
@@ -33,6 +33,7 @@ const makeComponent = (account, index) => {
 
   //header정보 
   const header = targetSection.querySelector('.header-title')
+  const headerImg = targetSection.querySelector('.img-profile')
   //계좌 정보 
   const accNum = targetSection.querySelector('.account-number')
   const accTotal = targetSection.querySelector('.account-total')
@@ -43,6 +44,7 @@ const makeComponent = (account, index) => {
 
   //데이터 출력
   header.innerText = account.accountName
+  headerImg.src = `./img/header-img${index + 1}.png`
   accNum.innerText = account.accountNum
   accTotal.innerText = `${Number(account.accountCash).toLocaleString()}원`
   barGage.style.backgroundColor = account.barColor
