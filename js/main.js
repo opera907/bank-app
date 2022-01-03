@@ -136,7 +136,12 @@ const leftBudget = (totalSpend, budget) => {
   return Number(budget) - Number(totalSpend)
 }
 const leftDay = () => {
-  return // 말일 - 오늘
+  const today = new Date('2021/10/4') //임의로 오늘 설정 
+  const year = today.getFullYear()
+  const month = today.getMonth() + 1
+  const lastDay = new Date(year, month, 0)
+ 
+  return lastDay.getDate() - today.getDate()// 말일 - 오늘
 }
 const calTotal = (goal, SavedMoney) => {
   return (Number(goal) - Number(SavedMoney)).toLocaleString()
