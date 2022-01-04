@@ -24,6 +24,7 @@ function start(accountArr) {
   for (let i = 0; i < accountsLength; i++) {
     const account = accounts[i]
     makeComponent(account, i)
+    slideSec(account, i)
   }
 }
 
@@ -82,7 +83,7 @@ const makeComponent = (account, index) => {
 
   let currDate
   let currIndex = 0
-  console.log(account.bankList.reverse())
+  account.bankList.reverse()
   account.bankList.forEach((day, index, bankList) => {
     if (currDate !== day.date) {
       // outer ul li생성
@@ -99,7 +100,6 @@ const makeComponent = (account, index) => {
 
       dayTit.innerText = calcDate(day.date)
       dayTotal.innerText = `${calcTotalSpend(day.date, account.bankList)}원 지출`
-
       //inner ul생성
       const innerUl = document.createElement('ul')
       const innerLi = document.createElement('li')
@@ -130,7 +130,6 @@ const makeComponent = (account, index) => {
     currDate = day.date
   })
 }
-
 const leftBudgetPercent = (totalSpend, budget) => {
   return (Number(totalSpend) / Number(budget)) * 100
 }
@@ -142,8 +141,8 @@ const leftDay = () => {
   const year = today.getFullYear()
   const month = today.getMonth() + 1
   const lastDay = new Date(year, month, 0)
- 
-  return lastDay.getDate() - today.getDate()// 말일 - 오늘
+
+  return lastDay.getDate() - today.getDate() // 말일 - 오늘
 }
 const calTotal = (goal, SavedMoney) => {
   return (Number(goal) - Number(SavedMoney)).toLocaleString()
@@ -185,4 +184,13 @@ const calcTotalSpend = (date, account) => {
     (sum, curr) => sum + curr.price,
     0)
   return total.toLocaleString()
+}
+const slideSec = (account, i) => {
+  const targetSection = document.querySelector(`.account-${i + 1}`)
+  const touchBar = targetSection.querySelector('.show-full-list');
+  const botSec = targetSection.querySelector('.bottom-section');
+
+  // 지출내역 클릭시 위로 슬라이드 
+
+  touchBar.addEventListener("click", () => botSec.classList.toggle('active'))
 }
