@@ -194,3 +194,6 @@ const slideSec = (account, i) => {
 
   touchBar.addEventListener("click", () => botSec.classList.toggle('active'))
 }
+const swiper = new Swiper('.swiper', {
+  direction: 'horizontal'
+})
